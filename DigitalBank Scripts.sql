@@ -19,3 +19,54 @@ INSERT INTO Usuarios (Nombre, FechaNacimiento, Sexo) VALUES
 ('Pedro Martinez', '1992-11-10', 'M'),
 ('Ana López', '1988-03-25', 'F'),
 ('Carlos Rodríguez', '1995-07-08', 'M');
+
+-- Sp para crear un nuevo usuario 
+CREATE PROCEDURE InsertarUsuario
+    @Nombre NVARCHAR(50),
+    @Sexo CHAR(1),
+    @FechaNacimiento DATE
+AS
+BEGIN
+    INSERT INTO Usuarios (Nombre, Sexo, FechaNacimiento)
+    VALUES (@Nombre, @Sexo, @FechaNacimiento);
+END;
+
+-- Sp para actualizar un usuario existente
+CREATE PROCEDURE ActualizarUsuario
+    @Id INT,
+    @Nombre NVARCHAR(50),
+    @Sexo CHAR(1),
+    @FechaNacimiento DATE
+AS
+BEGIN
+    UPDATE Usuarios
+    SET Nombre = @Nombre,
+        Sexo = @Sexo,
+        FechaNacimiento = @FechaNacimiento
+    WHERE Id = @Id;
+END;
+
+-- Sp para eliminar un usuario 
+CREATE PROCEDURE EliminarUsuario
+    @Id INT
+AS
+BEGIN
+    DELETE FROM Usuarios
+    WHERE Id = @Id;
+END;
+-- Sp para  obtener la lista de los usuarios
+CREATE PROCEDURE ObtenerUsuarios
+AS
+BEGIN
+    SELECT Id, Nombre, Sexo, FechaNacimiento
+    FROM Usuarios;
+END;
+-- Sp para obtener un usuario por Id 
+CREATE PROCEDURE ObtenerUsuarioPorId
+    @Id INT
+AS
+BEGIN
+    SELECT Id, Nombre, Sexo, FechaNacimiento
+    FROM Usuarios
+    WHERE Id = @Id;
+END;

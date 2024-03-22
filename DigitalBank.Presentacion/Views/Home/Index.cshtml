@@ -81,7 +81,7 @@
         };
 
         $(document).ready(() => {
-            listaContactos();
+            listaUsuarios();
         });
 
         function mostrarModal(modelo) {
@@ -116,14 +116,14 @@
                 .then(response => response.ok ? response.json() : Promise.reject(response))
                 .then(dataJson => {
                     if (dataJson.valor) {
-                        alert(NuevoModelo["idContacto"] == "0" ? "Registrado" : "Editado");
+                        alert(NuevoModelo["Id] == "0" ? "Registrado" : "Editado");
                         $('.modal').modal('hide');
-                        listaContactos();
+                        listaUsuarios();
                     }
                 });
         });
 
-        function listaContactos() {
+        function listaUsuarios() {
             fetch("Home/Lista")
                 .then(response => response.ok ? response.json() : Promise.reject(response))
                 .then(dataJson => {
@@ -146,22 +146,22 @@
         }
 
         $("#tbUsuario tbody").on("click", ".btn-editar", function () {
-            let contacto = $(this).data("modelo");
-            mostrarModal(contacto);
+            let usuario = $(this).data("modelo");
+            mostrarModal(usuario);
         });
 
         $("#tbUsuario tbody").on("click", ".btn-eliminar", function () {
-            let idcontacto = $(this).data("id");
+            let idUsuario = $(this).data("id");
             let resultado = window.confirm("¿Desea eliminar el Usuario?");
 
             if (resultado) {
-                fetch("Home/Eliminar?id=" + idcontacto, {
+                fetch("Home/Eliminar?id=" + idUsuario, {
                     method: "DELETE"
                 })
                     .then(response => response.ok ? response.json() : Promise.reject(response))
                     .then(dataJson => {
                         if (dataJson.valor) {
-                            listaContactos();
+                            listaUsuarios();
                         }
                     });
             }
