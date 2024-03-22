@@ -37,7 +37,6 @@ El repositorio se organiza de la siguiente manera:
 
 ## Pruebas
 
-Se recomienda realizar pruebas unitarias, pruebas de integración y pruebas de sistema para validar el correcto funcionamiento del sistema en todas las capas.
 
 ## Contribuciones
 
