@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DigitalBank.Datos\DigitalBank.Datos.csproj" />
     <ProjectReference Include="..\DigitalBank.Modelos\DigitalBank.Modelos.csproj" />
-    <ProjectReference Include="..\DigitalBank.Negocio\DigitalBank.Negocio.csproj" />
   </ItemGroup>
 
 </Project>
