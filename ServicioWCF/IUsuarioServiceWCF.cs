@@ -26,6 +26,9 @@ namespace ServicioWCF
 
         [OperationContract]
         bool EliminarUsuario(int id);
+
+        [OperationContract]
+        bool GrabarLog(string evento);
     }
 
 

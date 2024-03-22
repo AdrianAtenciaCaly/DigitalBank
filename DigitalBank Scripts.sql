@@ -20,8 +20,21 @@ INSERT INTO Usuarios (Nombre, FechaNacimiento, Sexo) VALUES
 ('Ana López', '1988-03-25', 'F'),
 ('Carlos Rodríguez', '1995-07-08', 'M');
 
+CREATE TABLE Log (
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    FechaHora DATETIME NOT NULL,
+    Evento NVARCHAR(255) NOT NULL
+);
+CREATE PROCEDURE RegistrarEventoLog
+    @FechaHora DATETIME,
+    @Evento NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO Log (FechaHora, Evento)
+    VALUES (@FechaHora, @Evento);
+END;
 -- Sp para crear un nuevo usuario 
-CREATE PROCEDURE InsertarUsuario
+CREATE PROCEDURE CrearUsuarioSP
     @Nombre NVARCHAR(50),
     @Sexo CHAR(1),
     @FechaNacimiento DATE
@@ -32,7 +45,7 @@ BEGIN
 END;
 
 -- Sp para actualizar un usuario existente
-CREATE PROCEDURE ActualizarUsuario
+CREATE PROCEDURE ActualizarUsuarioSP
     @Id INT,
     @Nombre NVARCHAR(50),
     @Sexo CHAR(1),
@@ -47,7 +60,7 @@ BEGIN
 END;
 
 -- Sp para eliminar un usuario 
-CREATE PROCEDURE EliminarUsuario
+CREATE PROCEDURE EliminarUsuarioSP
     @Id INT
 AS
 BEGIN
@@ -55,14 +68,14 @@ BEGIN
     WHERE Id = @Id;
 END;
 -- Sp para  obtener la lista de los usuarios
-CREATE PROCEDURE ObtenerUsuarios
+CREATE PROCEDURE ObtenerUsuariosSP
 AS
 BEGIN
     SELECT Id, Nombre, Sexo, FechaNacimiento
     FROM Usuarios;
 END;
 -- Sp para obtener un usuario por Id 
-CREATE PROCEDURE ObtenerUsuarioPorId
+CREATE PROCEDURE ObtenerUsuarioPorIdSP
     @Id INT
 AS
 BEGIN
@@ -70,3 +83,5 @@ BEGIN
     FROM Usuarios
     WHERE Id = @Id;
 END;
+
+

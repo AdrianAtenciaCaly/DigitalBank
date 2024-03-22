@@ -154,5 +154,36 @@ namespace ServicioWCF
             }
             return usuarios;
         }
+
+        public bool GrabarLog(string Evento)
+        {
+            bool exito = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("RegistrarEventoLog", connection))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@FechaHora ", DateTime.Now);
+                        cmd.Parameters.AddWithValue("Evento", Evento);
+                     
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+
+
+                        exito = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                exito = false;
+            }
+
+            return exito;
+        }
     }
 }
