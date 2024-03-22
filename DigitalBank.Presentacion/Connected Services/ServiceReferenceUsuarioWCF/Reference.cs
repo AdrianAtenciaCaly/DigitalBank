@@ -124,22 +124,22 @@ namespace ServiceReferenceUsuarioWCF
         System.Threading.Tasks.Task<ServiceReferenceUsuarioWCF.Usuario> ObtenerUsuarioPorIdAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/CrearUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/CrearUsuarioResponse")]
-        void CrearUsuario(ServiceReferenceUsuarioWCF.Usuario usuario);
+        bool CrearUsuario(ServiceReferenceUsuarioWCF.Usuario usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/CrearUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/CrearUsuarioResponse")]
-        System.Threading.Tasks.Task CrearUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario);
+        System.Threading.Tasks.Task<bool> CrearUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/ActualizarUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/ActualizarUsuarioResponse")]
-        void ActualizarUsuario(ServiceReferenceUsuarioWCF.Usuario usuario);
+        bool ActualizarUsuario(ServiceReferenceUsuarioWCF.Usuario usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/ActualizarUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/ActualizarUsuarioResponse")]
-        System.Threading.Tasks.Task ActualizarUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario);
+        System.Threading.Tasks.Task<bool> ActualizarUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/EliminarUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/EliminarUsuarioResponse")]
-        void EliminarUsuario(int id);
+        bool EliminarUsuario(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsuarioServiceWCF/EliminarUsuario", ReplyAction="http://tempuri.org/IUsuarioServiceWCF/EliminarUsuarioResponse")]
-        System.Threading.Tasks.Task EliminarUsuarioAsync(int id);
+        System.Threading.Tasks.Task<bool> EliminarUsuarioAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -212,32 +212,32 @@ namespace ServiceReferenceUsuarioWCF
             return base.Channel.ObtenerUsuarioPorIdAsync(id);
         }
         
-        public void CrearUsuario(ServiceReferenceUsuarioWCF.Usuario usuario)
+        public bool CrearUsuario(ServiceReferenceUsuarioWCF.Usuario usuario)
         {
-            base.Channel.CrearUsuario(usuario);
+            return base.Channel.CrearUsuario(usuario);
         }
         
-        public System.Threading.Tasks.Task CrearUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario)
+        public System.Threading.Tasks.Task<bool> CrearUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario)
         {
             return base.Channel.CrearUsuarioAsync(usuario);
         }
         
-        public void ActualizarUsuario(ServiceReferenceUsuarioWCF.Usuario usuario)
+        public bool ActualizarUsuario(ServiceReferenceUsuarioWCF.Usuario usuario)
         {
-            base.Channel.ActualizarUsuario(usuario);
+            return base.Channel.ActualizarUsuario(usuario);
         }
         
-        public System.Threading.Tasks.Task ActualizarUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario)
+        public System.Threading.Tasks.Task<bool> ActualizarUsuarioAsync(ServiceReferenceUsuarioWCF.Usuario usuario)
         {
             return base.Channel.ActualizarUsuarioAsync(usuario);
         }
         
-        public void EliminarUsuario(int id)
+        public bool EliminarUsuario(int id)
         {
-            base.Channel.EliminarUsuario(id);
+            return base.Channel.EliminarUsuario(id);
         }
         
-        public System.Threading.Tasks.Task EliminarUsuarioAsync(int id)
+        public System.Threading.Tasks.Task<bool> EliminarUsuarioAsync(int id)
         {
             return base.Channel.EliminarUsuarioAsync(id);
         }

@@ -4,67 +4,92 @@ using DigitalBank.Presentacion.Models;
 using DigitalBank.Presentacion.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ServiceReferenceUsuarioWCF;
+using DigitalBank.Negocio.ServiceWFC;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace DigitalBank.Presentacion.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
-        private readonly IUsuarioService _usuarioService;
-        public HomeController(IUsuarioService usuarioService)
+        private readonly ServiceReferenceUsuarioWCF.UsuarioServiceWCFClient _service;
+
+        public HomeController(ServiceReferenceUsuarioWCF.UsuarioServiceWCFClient service)
         {
-            _usuarioService = usuarioService;
+            _service = service;
         }
         [HttpGet]
-        public async Task <IActionResult> Lista()
+        public async Task<IActionResult> Lista()
         {
-            IQueryable<Usuario> usuarios = await _usuarioService.ObtenerTodos();
-            List<VMUsuario> listaUsuarios = (List<VMUsuario>)usuarios.Select(x => new VMUsuario()
+           
+            var usuariosWCF = await _service.ObtenerUsuariosAsync();
+
+           
+            var usuariosModel = new List<VMUsuario>();
+            foreach (var usuarioWCF in usuariosWCF)
             {
-                Id = x.Id,
-                Nombre = x.Nombre,
-                Sexo =x.Sexo,
-                FechaNacimiento = x.FechaNacimiento,
-            }) ;
-            return StatusCode(StatusCodes.Status200OK, listaUsuarios);
+                usuariosModel.Add(new VMUsuario
+                {
+                    Id = usuarioWCF.Id,
+                    Nombre = usuarioWCF.Nombre,
+                    FechaNacimiento = usuarioWCF.FechaNacimiento,
+                    Sexo = usuarioWCF.Sexo
+                });
+            }
+
+            
+            return StatusCode(StatusCodes.Status200OK, usuariosModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Insertar([FromBody] VMUsuario vMUsuario)
         {
-            Usuario usuario = new Usuario()
+
+            ServiceReferenceUsuarioWCF.Usuario usuario = new ServiceReferenceUsuarioWCF.Usuario()
             {
                 Nombre = vMUsuario.Nombre,
                 Sexo = vMUsuario.Sexo,
                 FechaNacimiento = vMUsuario.FechaNacimiento
             };
-            bool resp = await _usuarioService.Adicionar(usuario);
-            return StatusCode(StatusCodes.Status200OK, new {valor = resp});
 
+
+            bool resp = await _service.CrearUsuarioAsync(usuario);
+
+            // Devolver una respuesta con el estado de la operación
+            return StatusCode(StatusCodes.Status200OK, new { valor = resp });
         }
 
         [HttpPut]
         public async Task<IActionResult> Actualizar([FromBody] VMUsuario vMUsuario)
         {
-            Usuario usuario = new Usuario()
+            
+            ServiceReferenceUsuarioWCF.Usuario usuario = new ServiceReferenceUsuarioWCF.Usuario()
             {
-                Id= vMUsuario.Id,   
+                Id = vMUsuario.Id,
                 Nombre = vMUsuario.Nombre,
                 Sexo = vMUsuario.Sexo,
                 FechaNacimiento = vMUsuario.FechaNacimiento
             };
-            bool resp = await _usuarioService.Modificar(usuario);
-            return StatusCode(StatusCodes.Status200OK, new { valor = resp });
 
+       
+            bool resp = await _service.ActualizarUsuarioAsync(usuario);
+
+           
+            return StatusCode(StatusCodes.Status200OK, new { valor = resp });
         }
 
         [HttpDelete]
+        [HttpDelete]
         public async Task<IActionResult> Eliminar(int id)
         {
-           
-            bool resp = await _usuarioService.Eliminar(id);
-            return StatusCode(StatusCodes.Status200OK, new { valor = resp });
+            
+            bool resp = await _service.EliminarUsuarioAsync(id);
 
+       
+            return StatusCode(StatusCodes.Status200OK, new { valor = resp });
         }
         //public HomeController(ILogger<HomeController> logger)
         //{

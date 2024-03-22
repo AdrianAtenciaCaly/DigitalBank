@@ -16,11 +16,15 @@ namespace ServicioWCF
     public class Service1 : IUsuarioServiceWCF
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["MiConexionBD"].ConnectionString;
-        public void ActualizarUsuario(Usuario usuario)
+        public bool ActualizarUsuario(Usuario usuario)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            bool exito = false;
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("ActualizarUsuarioSP", connection)) // Reemplaza "ActualizarUsuarioSP" con el nombre real de tu stored procedure para actualizar usuarios
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("ActualizarUsuarioSP", connection)) 
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Id", usuario.Id);
@@ -29,29 +33,56 @@ namespace ServicioWCF
                     cmd.Parameters.AddWithValue("@Sexo", usuario.Sexo);
                     connection.Open();
                     cmd.ExecuteNonQuery();
+                    exito = true;
                 }
             }
-        }
-
-        public void CrearUsuario(Usuario usuario)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            }
+            catch (Exception ex)
             {
-                using (SqlCommand cmd = new SqlCommand("CrearUsuarioSP", connection)) // Reemplaza "CrearUsuarioSP" con el nombre real de tu stored procedure para crear usuarios
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
-                    cmd.Parameters.AddWithValue("@FechaNacimiento", usuario.FechaNacimiento);
-                    cmd.Parameters.AddWithValue("@Sexo", usuario.Sexo);
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+
+                exito = false;
             }
+
+            return exito;
         }
 
-        public void EliminarUsuario(int id)
+        public bool CrearUsuario(Usuario usuario)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            bool exito = false; 
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("CrearUsuarioSP", connection)) 
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                        cmd.Parameters.AddWithValue("@FechaNacimiento", usuario.FechaNacimiento);
+                        cmd.Parameters.AddWithValue("@Sexo", usuario.Sexo);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+
+                        
+                        exito = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+              
+                exito = false; 
+            }
+
+            return exito; 
+        }
+
+        public bool EliminarUsuario(int id)
+        {
+            bool exito = false;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("EliminarUsuarioSP", connection)) // Reemplaza "EliminarUsuarioSP" con el nombre real de tu stored procedure para eliminar usuarios
                 {
@@ -61,6 +92,14 @@ namespace ServicioWCF
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+            catch (Exception ex)
+            {
+              
+                exito = false; 
+            }
+
+            return exito; 
         }
 
         public Usuario ObtenerUsuarioPorId(int id)

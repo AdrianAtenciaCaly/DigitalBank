@@ -19,13 +19,13 @@ namespace ServicioWCF
         Usuario ObtenerUsuarioPorId(int id);
 
         [OperationContract]
-        void CrearUsuario(Usuario usuario);
+        bool CrearUsuario(Usuario usuario);
 
         [OperationContract]
-        void ActualizarUsuario(Usuario usuario);
+        bool ActualizarUsuario(Usuario usuario);
 
         [OperationContract]
-        void EliminarUsuario(int id);
+        bool EliminarUsuario(int id);
     }
 
 
