@@ -1,0 +1,18 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:52315/UsuarioServiceWCF.svc"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "enableDataBinding": true,
+    "namespaceMappings": [
+      "*, ServiceReferenceUsuarioWCF"
+    ],
+    "sync": true,
+    "targetFramework": "net8.0",
+    "typeReuseMode": "All"
+  }
+}
