@@ -35,9 +35,6 @@ El repositorio se organiza de la siguiente manera:
 
 
 
-## Pruebas
-
-
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, sigue estos pasos:
@@ -49,6 +46,9 @@ Las contribuciones son bienvenidas. Si deseas contribuir al proyecto, sigue esto
 
 Autor: Adrian Atencia Caly
 Contacto: adrianandres1998@gmail.com
+
+## Notas
+dentro de la solucion  hay un .sql (DigitalBank Scripts.sql) que contiene todos los scripts necesariso desde la creacion de base de datos hasta procedimiento de almacenados
 ## Licencia
 
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE.md para más detalles.
