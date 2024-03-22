@@ -116,7 +116,7 @@ namespace DigitalBank.PresentacionCliente.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+               
                 bool usuarioEliminado = UsuarioServiceWCFClient.EliminarUsuario(id);
 
                 if (usuarioEliminado)
@@ -143,18 +143,18 @@ namespace DigitalBank.PresentacionCliente.Controllers
         }
         public ActionResult ExportToExcel()
         {
-            IEnumerable<Usuario> usuarios = UsuarioServiceWCFClient.ObtenerUsuarios(); // Obtener datos de la consulta
+            IEnumerable<Usuario> usuarios = UsuarioServiceWCFClient.ObtenerUsuarios(); 
 
-            // Crear el archivo Excel
+          
             ExcelPackage excelPackage = new ExcelPackage();
             ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Usuarios");
 
-            // Escribir los encabezados
+            
             worksheet.Cells[1, 1].Value = "Fecha de Nacimiento";
             worksheet.Cells[1, 2].Value = "Nombre";
             worksheet.Cells[1, 3].Value = "Sexo";
 
-            // Escribir los datos de los usuarios en el archivo Excel
+            
             int row = 2;
             foreach (var usuario in usuarios)
             {
@@ -164,7 +164,6 @@ namespace DigitalBank.PresentacionCliente.Controllers
                 row++;
             }
 
-            // Guardar el archivo Excel en la respuesta HTTP
             byte[] excelFile = excelPackage.GetAsByteArray();
             return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Usuarios.xlsx");
         }
