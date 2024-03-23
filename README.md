@@ -15,7 +15,7 @@ El sistema está diseñado siguiendo una arquitectura en n capas para separar la
 
 ## Requisitos del Sistema
 
-- Visual Studio 20200  para abrir y compilar el proyecto.
+- Visual Studio 2022 para abrir y compilar el proyecto.
 - SQL Server Management Studio (SSMS) para la gestión de la base de datos.
 
 ## Estructura del Proyecto
